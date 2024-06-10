@@ -6,13 +6,21 @@ from django.core.files.storage import FileSystemStorage
 from random import choice
 from main.models import Enemy, Heroes
 
+def make_damage(request):
+    my_enemy = Enemy.objects.filter(id=1).first() #without first() the result is ObjectSet not Object
+    my_enemy.hp-=1
+    my_enemy.save() # to save object to the db
+    print("asdasdasd") 
+    return redirect ("battle")
+
 def battle(request, user_id=1, method=''):
     """Отображение """
 
     if method == 1:
-        my_enemy = Enemy.objects.filter(enemy_id=1)
+        my_enemy = Enemy.objects.filter(id=1).first() #without first() the result is ObjectSet not Object
         my_enemy.hp-=1
-        print("asdasdasd")
+        my_enemy.save() # to save object to the db
+        print("asdasdasd") 
 
     hero = Heroes.objects.get(user=user_id)
     enemy = choice(Enemy.objects.all())

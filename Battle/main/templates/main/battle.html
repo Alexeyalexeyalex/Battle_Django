@@ -50,11 +50,9 @@
     
     <div class="hero_actions_hero">
         <div class="item">
-            <form action="damage_hero" method="POST"></form>
-                <a type="submit" href="{% url 'battle' %}">
-                    <img src="{% static 'main/images/sword.png/' %}" alt="" class="hero_actions_hero_images">
-                </a>
-            </form>
+            <a type="submit" href="{% url 'make_damage' %}">
+                <img src="{% static 'main/images/sword.png/' %}" alt="" class="hero_actions_hero_images">
+            </a>
             <p>{{ battle.damage_hero }}</p>
         </div>
 
