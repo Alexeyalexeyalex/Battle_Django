@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main/main.css/' %}">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" href="{% static 'main/images/ico.png/' %}">
+</head>
+
+<body>
+    <header>
+        <div class="header_menu">
+            <a href="{% url 'battle' %}" class="header_menu_a">В бой</a>
+        </div>
+    
+        <div class="header_menu">
+            <a href="{% url 'leaders' %}" class="header_menu_a">Лидеры</a>
+        </div>
+    
+        <div class="header_menu">
+            <a href="{% url 'about' %}" class="header_menu_a">Информация</a>
+        </div>
+    
+        <div class="header_menu">
+            <a href="{% url 'login' %}" class="header_menu_a">Войти</a>
+        </div>
+    </header>
+    
+    {% block content %}
+        <p>Скоро тут появится текст...</p>
+    {% endblock %}
+    
+</body>
+</html>

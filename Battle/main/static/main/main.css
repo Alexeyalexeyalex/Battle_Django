@@ -23,7 +23,11 @@ header{
     align-items: center;
     font-size: 3vw;
 }
-.header_menu:hover{
+.header_menu_a{
+    color: #E1F7F5;
+    text-decoration: none;
+}
+.header_menu_a:hover{
     cursor: pointer;
     color: #9AC8CD;
 }

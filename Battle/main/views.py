@@ -2,51 +2,54 @@
 Файл представлений
 """
 from django.shortcuts import render, redirect
-from main.models import Recipes, RecipesCategories
-from .forms import RecipesForm
 from django.core.files.storage import FileSystemStorage
+from random import choice
+from main.models import Enemy, Heroes
 
-def recipes(request):
-    """Отображение рецептов"""
-    recipes = Recipes.objects.all()
-    return render(request, 'main/recipes.html', {'recipes':recipes})
+def battle(request, user_id=1, method=''):
+    """Отображение """
 
-def recipe(request, recipe_id):
-    """Отображение рецепта по id"""
-    recipes = Recipes.objects.get(id=recipe_id)
-    recipe = {
-        "name": recipes.name,
-        "image": recipes.image,
-        "author": recipes.author,
-        "cooking_time": recipes.cooking_time,
-        "ingredients": recipes.ingredients,
-        "description": recipes.description,
-        "cooking_steps": recipes.cooking_steps
+    if method == 1:
+        my_enemy = Enemy.objects.filter(enemy_id=1)
+        my_enemy.hp-=1
+        print("asdasdasd")
+
+    hero = Heroes.objects.get(user=user_id)
+    enemy = choice(Enemy.objects.all())
+
+    battle = {
+        
+        'image_hero':hero.image_hero,
+        'image_hero_back':hero.image_back,
+        'damage_hero':hero.damage,
+        'defeat_hero':hero.defeat,
+        'fases_hero':hero.fases,
+        'bottles_hero':hero.bottles,
+        'hp_hero':hero.hp,
+
+        'name_enemy':enemy.name,
+        'image_enemy':enemy.image_enemy,
+        'image_back_enemy':enemy.image_back,
+        'damage_enemy':enemy.damage,
+        'defeat_enemy':enemy.defeat,
+        'fases_enemy':enemy.fases,
+        'hp_enemy':enemy.hp,
+        'lvl_enemy':enemy.lvl,
+        'money_enemy':enemy.money,
+    
     }
 
-    return render(request, 'main/recipe.html', {'recipe':recipe})
+    return render(request, 'main/battle.html', {'battle':battle})
 
 
-def recipe_form(request):
-    """Отображение формы добавления, добавление рецепта"""
-    if request.method == 'POST':
-        form = RecipesForm(request.POST, request.FILES)
-        if form.is_valid():
-            data = form.cleaned_data
-            recipe = Recipes.objects.create(
-                name=data['name'],
-                description=data['description'],
-                cooking_steps=data['cooking_steps'],
-                cooking_time=data['cooking_time'],
-                image=f"main/{data['image'].name}/",
-                ingredients=data['ingredients'],
-                author=data['author'],)
-            RecipesCategories.objects.create(
-                recipes=recipe,
-                category=data['category'],)
-            fs = FileSystemStorage(location='main/static/main/', base_url='/main')
-            fs.save(data['image'].name, data['image'])
-            return redirect('recipe_form')
-    else:
-        form = RecipesForm()
-    return render(request, 'main/recipe_form.html', {'form': form})
+def about(request):
+    """Отображение """
+    return render(request, 'main/about.html')
+
+def leaders(request):
+    """Отображение """
+    return render(request, 'main/leaders.html')
+
+def login(request):
+    """Отображение """
+    return render(request, 'main/login.html')

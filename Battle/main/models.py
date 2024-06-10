@@ -4,33 +4,44 @@
 
 from django.db import models
 
-class Recipes(models.Model):
-    """Установка полей для модели рецептов"""
+
+
+class Users(models.Model):
+    """Установка полей для модели пользователей"""
+    login = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    lvl = models.IntegerField()
+
+    def __str__(self):
+        return f'\n{self.login}\n{self.password}'
+
+class Enemy(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    cooking_steps = models.TextField()
-    cooking_time = models.IntegerField()
-    image = models.CharField(max_length=100)
-    author = models.CharField(max_length=100)
-    ingredients = models.TextField()
-
-    def __str__(self):
-        return f'\n{self.name}:\n{self.description}\n{self.cooking_steps}\n{self.cooking_time}\
-            \n{self.author}\n{self.ingredients}\n'
+    image_enemy = models.CharField(max_length=100)
+    image_back = models.CharField(max_length=100)
+    damage = models.IntegerField()
+    defeat = models.IntegerField()
+    fases = models.IntegerField()
+    hp = models.IntegerField()
+    lvl = models.IntegerField()
+    money = models.IntegerField()
 
 
-class Categories(models.Model):
-    """Установка полей для модели категории"""
-    name = models.CharField(max_length=100)
+class Frases(models.Model):
+    type = models.CharField(max_length=100)
+    frase_text = models.TextField()
+    enemy_hero = models.ForeignKey(Enemy, on_delete=models.CASCADE, blank=True, null=True)
 
-    def __str__(self):
-        return f'\n{self.name}\n'
+     
+class Heroes(models.Model):
+    image_hero = models.CharField(max_length=100)
+    image_back = models.CharField(max_length=100)
+    damage = models.IntegerField()
+    defeat = models.IntegerField()
+    fases = models.IntegerField()
+    bottles = models.IntegerField()
+    hp = models.IntegerField()
+    user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
-class RecipesCategories(models.Model):
-    """Установка полей для модели рецептов и категорий"""
-    recipes = models.ForeignKey(Recipes, on_delete=models.CASCADE)
-    category = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return f'\n{self.recipes.name}:\n{self.category.name}\n'
