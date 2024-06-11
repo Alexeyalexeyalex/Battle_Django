@@ -5,16 +5,6 @@
 from django.db import models
 
 
-
-class Users(models.Model):
-    """Установка полей для модели пользователей"""
-    login = models.CharField(max_length=100)
-    password = models.CharField(max_length=100)
-    lvl = models.IntegerField()
-
-    def __str__(self):
-        return f'\n{self.login}\n{self.password}'
-
 class Enemy(models.Model):
     name = models.CharField(max_length=100)
     image_enemy = models.CharField(max_length=100)
@@ -23,9 +13,22 @@ class Enemy(models.Model):
     defeat = models.IntegerField()
     fases = models.IntegerField()
     hp = models.IntegerField()
+    min_enemy_hp = models.IntegerField()
+    max_enemy_hp = models.IntegerField()
     lvl = models.IntegerField()
     money = models.IntegerField()
+    exp = models.IntegerField()
+    hero_defeat_debaf = models.IntegerField()
+    hero_damage_debaf = models.IntegerField()
 
+
+class Users(models.Model):
+    """Установка полей для модели пользователей"""
+    login = models.CharField(max_length=100)
+    password = models.CharField(max_length=100)
+    def __str__(self):
+        return f'\n{self.login}\n{self.password}'
+    
 
 class Frases(models.Model):
     type = models.CharField(max_length=100)
@@ -41,7 +44,12 @@ class Heroes(models.Model):
     fases = models.IntegerField()
     bottles = models.IntegerField()
     hp = models.IntegerField()
+    lvl = models.IntegerField()
+    exp = models.IntegerField()
+    exp_to_next_lvl = models.IntegerField()
+    enemy = models.ForeignKey(Enemy, on_delete=models.DO_NOTHING, blank=True, null=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
 
-
+class image_auth(models.Model):
+    auth_image = models.CharField(max_length=100)

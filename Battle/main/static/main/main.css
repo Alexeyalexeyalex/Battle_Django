@@ -147,7 +147,7 @@ body{
 }
 
 
-.hero_actions_hero_images{
+.hero_actions_hero_images, .hero_actions_hero_images_defeat{
     max-width: 3vw;
     max-height: 3vw;
     margin-left: 1vw;

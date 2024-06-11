@@ -8,7 +8,7 @@ from .models import Users, Frases, Enemy, Heroes
 @admin.register(Users)
 class UsersAdmin(admin.ModelAdmin):
     """Структурирует информацию о смежной таблице рецептов и категорий"""
-    list_display = ['login', 'password','lvl']
+    list_display = ['login', 'password']
 
 @admin.register(Frases)
 class FrasesAdmin(admin.ModelAdmin):
@@ -18,7 +18,7 @@ class FrasesAdmin(admin.ModelAdmin):
 @admin.register(Enemy)
 class EnemyAdmin(admin.ModelAdmin):
     """Структурирует информацию о смежной таблице рецептов и категорий"""
-    list_display = ['name', 'image_enemy', 'image_back', 'damage', 'defeat', 'fases', 'hp', 'lvl', 'money']
+    list_display = ['name', 'image_enemy', 'image_back', 'damage', 'defeat', 'fases', 'hp', 'min_enemy_hp', 'lvl', 'money']
 
 @admin.register(Heroes)
 class HeroesAdmin(admin.ModelAdmin):
