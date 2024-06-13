@@ -49,6 +49,20 @@ body{
     flex-direction: column;   
 }
 
+.start_div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 20vh;
+}
+
+.start_text{
+    font-size: 5vw;
+}
+
+.start_img{
+    padding-top: 10vh;
+}
 
 /* Информация о персонажах */
 .info{
@@ -63,15 +77,23 @@ body{
     display: flex;
     gap: 5px;
     width: 40vw;
+    align-items: center;
 }
 .hero_info_block{
     justify-content: flex-end;
+}
+
+.info_block_images_lvl{
+    max-width: 5vw;
+    max-height: 5vh;
+    padding-right: 1vw;
 }
 
 .info_block_images{
     max-width: 10vw;
     max-height: 10vh;
 }
+
 
 
 .hero_images{

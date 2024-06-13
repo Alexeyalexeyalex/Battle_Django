@@ -1,20 +1,15 @@
 """
 Файл представлений
 """
+from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
-from django.core.files.storage import FileSystemStorage
 from random import choice, randint
 from main.models import Enemy, Heroes, Users
-from django.contrib import messages
-# from win10toast import ToastNotifier
 
 global player_id, enemy_id
 player_id=''
 enemy_id=''
 
-# def show_message(title, text):
-#     toast = ToastNotifier()
-#     toast.show_toast(title, text, duration=5)
 
 def make_damage(request):
     global enemy_id, player_id
@@ -38,7 +33,6 @@ def make_damage(request):
             my_enemy.money = my_enemy.min_money
             my_enemy.exp = my_enemy.min_exp
             my_enemy.lvl = 1
-            # show_message('Победа!', 'Вы убили врага')
 
             if hero.exp_to_next_lvl <= hero.exp:
                 hero.lvl += 1 
@@ -46,13 +40,17 @@ def make_damage(request):
                 exp = hero.exp - hero.exp_to_next_lvl
                 hero.exp = exp
                 hero.exp_to_next_lvl = hero.exp_to_next_lvl*10/2
+            hero.save()
+            my_enemy.save()
+            return redirect ("start", text='Вы убили врага!')
     else:
         if my_enemy.damage > hero.defeat:
             hero.hp-=my_enemy.damage-hero.defeat
             if hero.hp<1:
                 leave(request)
                 hero.delete()
-                return redirect ("battle")
+                return redirect ("start", text='Вы погибли(')
+
 
         
     hero.save()
@@ -113,6 +111,13 @@ def enemy_lvl_up(person):
     money_up(person)
     choice((hp_up, defeat_up, damage_up))(person)
 
+
+def start(request, text):
+    start = {
+        'text':text,
+        
+    }
+    return render(request, 'main/start.html', {'start':start})
 
 
 def battle(request):
@@ -192,7 +197,6 @@ def battle(request):
         'hearts_enemy':hearts_enemy,
     
     }
-
     return render(request, 'main/battle.html', {'battle':battle})
 
 

@@ -6,8 +6,8 @@
 {% block content %}
 {% load static %}
 
-
 <div class="info">
+
     <div class="enemy_info_block">
         {% if battle.lvl_range > 10 %}
             <img src="{% static 'main/images/enemy.png' %}" alt="" class="info_block_images">
@@ -35,7 +35,7 @@
 
     <div class="hero_info_block">
         {% if battle.lvl_points > 0 %}
-            <img src="{% static 'main/images/lvl_up2.png' %}" alt="" class="info_block_images">
+            <img src="{% static 'main/images/lvl_up.png' %}" alt="" class="info_block_images_lvl">
         {% endif %} 
         {% for j in battle.hearts_hero %}
             {% if j %}

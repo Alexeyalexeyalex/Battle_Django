@@ -6,6 +6,7 @@ from . import views
 
 urlpatterns = [ 
     path('', views.battle, name='battle'),
+    path('start/<str:text>/', views.start, name='start'),
     path('battle/', views.battle, name='battle'),
     path('make_damage/', views.make_damage, name='make_damage'),
     path('leave/', views.leave, name='leave'),

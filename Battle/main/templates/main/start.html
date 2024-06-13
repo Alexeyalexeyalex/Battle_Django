@@ -1,0 +1,17 @@
+{% extends 'main/base.html' %}
+
+{% block title %}{% endblock %}
+
+
+{% block content %}
+{% load static %}
+
+<div class="start_div">
+    <p class="start_text">{{ start.text }}</p>
+    <a type="submit" href="{% url 'battle' %}">
+        <img src="{% static 'main/images/start1.png' %}" alt="" title="Начать бой" class="start_img">
+    </a>
+    
+</div>
+
+{% endblock %}
