@@ -4,7 +4,203 @@
 
 
 {% block content %}
+{% load static %}
 
-Shop
+<div class="shop_hero_actions_hero">
+    
+    <div class="shop_my_heroes">
+        <div class="hero_images_block" style="background-image: url('{% static shop.image_hero_back %}')">
+            <img src="{% static shop.image_hero %}" alt="">
+        </div>
+
+        <div class="shop_hero_stats">
+            <div class="item">
+                <img src="{% static 'main/images/sword.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Урон">
+                <p>{{ shop.damage_hero }}</p>
+            </div>
+            
+            <div class="item">
+                <img src="{% static 'main/images/full-heart.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Жизни">
+                <p>{{ shop.hp_hero }}/{{ shop.max_hp }}</p>
+            </div>
+
+            <div class="item">
+                <img src="{% static 'main/images/sheild.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Защита">
+                <p>{{ shop.defeat_hero }}</p>
+            </div>
+        
+            <div class="item">
+                <img src="{% static 'main/images/heal.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Зелья здоровья">
+                <p>{{ shop.bottles_hero }}</p>
+            </div>
+            
+            
+        </div>
+    </div>
+    <div class="shop_hero_stats">
+        
+        <div class="item">
+            <img src="{% static 'main/images/bottle_hp.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Восстанавливыемые жизни зельем">
+            <p>{{ shop.bottle_hp }}</p>
+        </div>
+    
+        <div class="item">
+            <img src="{% static 'main/images/lvl_up.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Опыт">
+            <p>{{ shop.exp }}/{{ shop.exp_to_next_lvl }}</p>
+        </div>
+
+        <div class="item">
+            <img src="{% static 'main/images/level.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Уровень">
+            <p>{{ shop.lvl }}</p>
+        </div>
+    
+        <div class="item">
+            <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Золото">
+            <p>{{ shop.gold }}</p>
+        </div>
+    
+    </div>
+
+    
+    
+
+</div>
+
+
+<div class="shop_hero_actions_hero">
+    <div class="item">
+        <p>{{ shop.gold }}G</p>
+        <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Очки для улучшения">
+    </div>
+
+    <div class="item">
+        <p>10G</p>
+        <a type="submit" href="{% url 'buy_bottle' %}">
+            <img src="{% static 'main/images/heal.png/' %}" alt="" class="hero_actions_hero_images" title="Зелье здоровья">
+        </a>
+    </div>
+
+    <div class="item">
+        <p>50G</p>
+        <a type="submit" href="{% url 'buy_scroll' %}">
+            <img src="{% static 'main/images/scroll.png/' %}" alt="" class="hero_actions_hero_images" title="Свиток призыва золота">
+        </a>
+    </div>
+    
+    <div class="item">
+        <p>100G</p>
+        <a type="submit" href="{% url 'buy_luck_bottle' %}">
+            <img src="{% static 'main/images/luck.png/' %}" alt="" class="hero_actions_hero_images" title="Зелье удачи">
+        </a>
+        </div>
+
+    <div class="item">
+        <p>1000G</p>
+        <a type="submit" href="{% url 'buy_death_bottle' %}">
+            <img src="{% static 'main/images/death.png/' %}" alt="" class="hero_actions_hero_images" title="Зелье смерти">
+        </a>
+    </div>
+
+</div>
+
+
+<div class="shop_hero_actions_hero">
+    <div class="item">
+        <p>{{ shop.lvl_points }}P</p>
+        <img src="{% static 'main/images/lvl_up1.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Очки для улучшения">
+    </div>
+
+    <div class="item">
+        <p>1P</p>
+        <a type="submit" href="{% url 'up_damage' %}">
+            <img src="{% static 'main/images/sword.png/' %}" alt="" class="hero_actions_hero_images" title="Урон">
+        </a>
+    </div>
+    
+    <div class="item">
+        <p>2P</p>
+        <a type="submit" href="{% url 'up_defeat' %}">
+            <img src="{% static 'main/images/sheild.png/' %}" alt="" class="hero_actions_hero_images" title="Защита">
+        </a>
+        </div>
+
+    <div class="item">
+        <p>3P</p>
+        <a type="submit" href="{% url 'up_bottle_hp' %}">
+            <img src="{% static 'main/images/bottle_hp.png/' %}" alt="" class="hero_actions_hero_images" title="Количество восстанавливаемого здоровья (макс.5)">
+        </a>
+    </div>
+
+    <div class="item">
+        <p>4P</p>
+        <a type="submit" href="{% url 'up_max_hp' %}">
+            <img src="{% static 'main/images/full-heart.png/' %}" alt="" class="hero_actions_hero_images" title="Дополнительное сердце (макс.5)">
+        </a>
+    </div>
+
+</div>
+
+
+<div class="shop_hero_actions_hero">
+    <div class="shop_buy_heroes">
+        <div class="shop_hero">
+            <div class="hero_images_block" style="background-image: url('{% static shop.image_hero_back %}')">
+                <img src="{% static shop.image_hero %}" alt="">
+            </div>
+            <div class="shop_hero_price">
+                <p>0G</p>
+                <a type="submit" href="{% url 'buy_default' %}">
+                    <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images" title="Стандартный облик">
+                </a>
+            </div>
+        </div>
+        
+        <div class="shop_hero">
+            <div class="hero_images_block" style="background-image: url('{% static 'main/images/spounch_back.jpg/' %}')">
+                <img src="{% static 'main/images/spounch1.png/' %}" alt="">
+            </div>
+            <div class="shop_hero_price">
+                <p>100G</p>
+                <a type="submit" href="{% url 'buy_patrik' %}">
+                    <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images" title="Патрик">
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="shop_hero_actions_hero">
+
+    <div class="shop_buy_heroes">
+        <div class="shop_hero">
+            <div class="hero_images_block" style="background-image: url('{% static 'main/images/zombi_back.jpg/' %}')">
+                <img src="{% static 'main/images/zombi.png/' %}" alt="">
+            </div>
+            <div class="shop_hero_price">
+                <p>100G</p>
+                <a type="submit" href="{% url 'buy_zombi' %}">
+                    <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images" title="Зомби">
+                </a>
+            </div>
+        </div>
+        
+        <div class="shop_hero">
+            <div class="hero_images_block" style="background-image: url('{% static 'main/images/mommy_back.jpg/' %}')">
+                <img src="{% static 'main/images/mommy.png/' %}" alt="">
+            </div>
+            <div class="shop_hero_price">
+                <p>100G</p>
+                <a type="submit" href="{% url 'buy_mumi' %}">
+                    <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images" title="Мумия">
+                </a>
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+
 
 {% endblock %}

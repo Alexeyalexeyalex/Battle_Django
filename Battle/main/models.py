@@ -59,6 +59,7 @@ class Heroes(models.Model):
     lvl_points = models.IntegerField()
     exp = models.IntegerField()
     exp_to_next_lvl = models.IntegerField()
+    gold = models.IntegerField()
     enemy = models.ForeignKey(Enemy, on_delete=models.DO_NOTHING, blank=True, null=True)
     user = models.ForeignKey(Users, on_delete=models.CASCADE)
 
