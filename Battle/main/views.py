@@ -5,6 +5,8 @@ from django.template.loader import render_to_string
 from django.shortcuts import render, redirect
 from random import choice, randint, choices
 from main.models import Enemy, Heroes, Users
+from .forms import LoginForm
+from http.cookies import SimpleCookie
 
 global player_id, enemy_id
 player_id=''
@@ -18,6 +20,11 @@ def make_damage(request):
 
     if hero.damage > my_enemy.defeat:
         my_enemy.hp-=hero.damage-my_enemy.defeat
+        if my_enemy.name=='Твоя яндере':
+            all_enemys = Enemy.objects.all()
+            for enemy in all_enemys:
+                enemy_lvl_up(enemy)
+                enemy.save()
 
     if my_enemy.hp < 1:
         if my_enemy.fases > 1:
@@ -160,7 +167,7 @@ def buy_hero(request, hero_image, back_image, coast):
     hero.save()
 
 def buy_default(request):
-    buy_hero(request, 'main/images/spounch1.png', 'main/images/spounch_back.jpg', 0)
+    buy_hero(request, 'main/images/gg.png', 'main/images/gg_back.jpg', 0)
     return redirect ("shop")
 
 def buy_patrik(request):
@@ -220,8 +227,11 @@ def enemy_lvl_up(person):
 
 
 def start(request, text):
+    num = randint(1,5)
+    image = f'main/images/start{num}.png'
     start = {
         'text':text,
+        'image':image,
     }
     return render(request, 'main/start.html', {'start':start})
 
@@ -231,13 +241,13 @@ def battle(request):
     global player_id, enemy_id
     
     if not  player_id:
-        return render(request, 'main/not_login.html')
+        return redirect('login')
     try:
         hero = Heroes.objects.get(user=player_id)
     except:
         hero = Heroes(
-                image_hero = "main/images/spounch1.png",
-                image_back = "main/images/spounch_back.jpg",
+                image_hero = "main/images/gg.png",
+                image_back = "main/images/gg_back.jpg",
                 damage = 1,
                 defeat = 0,
                 fases = 1,
@@ -250,7 +260,7 @@ def battle(request):
                 exp = 0,
                 exp_to_next_lvl = 10,
                 user = Users.objects.get(id=player_id),
-                gold = 0,
+                gold = 50,
                 )
 
         hero.save()
@@ -258,6 +268,9 @@ def battle(request):
     if not hero.enemy:
         enemy = choice(Enemy.objects.all())
         hero.enemy=enemy
+        if enemy.name=='Твоя яндере' and hero.hp > 1:
+            hero.max_hp -= 1
+            hero.hp -= 1
         hero.save()
     enemy_id = enemy.id
 
@@ -310,13 +323,14 @@ def battle(request):
 def shop(request):
     """Отображение """
     if not  player_id:
-        return render(request, 'main/not_login.html')
+        return redirect('login')
+
     try:
         hero = Heroes.objects.get(user=player_id)
     except:
         hero = Heroes(
-                image_hero = "main/images/spounch1.png",
-                image_back = "main/images/spounch_back.jpg",
+                image_hero = "main/images/gg.png",
+                image_back = "main/images/gg_back.jpg",
                 damage = 1,
                 defeat = 0,
                 fases = 1,
@@ -329,7 +343,7 @@ def shop(request):
                 exp = 0,
                 exp_to_next_lvl = 10,
                 user = Users.objects.get(id=player_id),
-                gold = 0,
+                gold = 50,
                 )
 
         hero.save()
@@ -368,5 +382,27 @@ def leaders(request):
 def login(request):
     """Отображение """
     global player_id
-    player_id = 1
-    return render(request, 'main/login.html')
+    
+
+
+    if request.method == 'POST':
+        form = LoginForm(request.POST, request.FILES)
+        if form.is_valid():
+            data = form.cleaned_data
+            try:
+                user_db = Users.objects.get(login=data['login'])
+            
+            except:
+                user = Users.objects.create(
+                    login=data['login'],
+                    password=data['pswrd'],
+                )
+                user_db = Users.objects.get(login=data['login'])
+            
+            if user_db.login == data['login'] and user_db.password == data['pswrd']:
+                player_id = user_db.id
+                return redirect('battle')
+
+    else:
+        form = LoginForm()
+    return render(request, 'main/login.html', {'form': form})

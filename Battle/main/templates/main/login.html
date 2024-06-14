@@ -5,8 +5,22 @@
 
 {% block content %}
 
-<div class="">
-    
+<div class="login_form"> 
+    <form method="post" enctype="multipart/form-data" class="login_form_form">
+        {% csrf_token %}
+        
+        <p>
+            <label for={{ form.name.name }}>Логин</label>
+            {{ form.login }}
+        </p>
+
+        <p>
+            <label for={{ form.description.name }}>Пароль</label>
+            {{ form.pswrd }}
+        </p>
+        
+        <input type="submit" value="Войти" class="login_form_form_input">
+    </form>
 </div>
 
 {% endblock %}

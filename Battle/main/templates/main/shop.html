@@ -16,7 +16,7 @@
         <div class="shop_hero_stats">
             <div class="item">
                 <img src="{% static 'main/images/sword.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Урон">
-                <p>{{ shop.damage_hero }}</p>
+                <p>{{ shop.damage_hero }}   </p>
             </div>
             
             <div class="item">
@@ -70,8 +70,10 @@
 <div class="shop_hero_actions_hero">
     <div class="item">
         <p>{{ shop.gold }}G</p>
-        <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Очки для улучшения">
+        <img src="{% static 'main/images/money.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Золото">
     </div>
+
+    <div class="line"></div>
 
     <div class="item">
         <p>10G</p>
@@ -110,6 +112,8 @@
         <img src="{% static 'main/images/lvl_up1.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Очки для улучшения">
     </div>
 
+    <div class="line"></div>
+    
     <div class="item">
         <p>1P</p>
         <a type="submit" href="{% url 'up_damage' %}">
@@ -144,8 +148,8 @@
 <div class="shop_hero_actions_hero">
     <div class="shop_buy_heroes">
         <div class="shop_hero">
-            <div class="hero_images_block" style="background-image: url('{% static shop.image_hero_back %}')">
-                <img src="{% static shop.image_hero %}" alt="">
+            <div class="hero_images_block" style="background-image: url('{% static 'main/images/gg_back.jpg/' %}')">
+                <img src="{% static 'main/images/gg.png/'%}" alt="">
             </div>
             <div class="shop_hero_price">
                 <p>0G</p>
