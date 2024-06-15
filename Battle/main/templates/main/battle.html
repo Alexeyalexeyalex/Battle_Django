@@ -75,26 +75,26 @@
     <div class="hero_actions_hero">
         <div class="item">
             <a type="submit" href="{% url 'make_damage' %}">
-                <img src="{% static 'main/images/sword.png/' %}" alt="" class="hero_actions_hero_images" title="Ударить">
+                <img src="{% static 'main/images/sword.png' %}" alt="" class="hero_actions_hero_images" title="Ударить">
             </a>
             <p>{{ battle.damage_hero }}</p>
         </div>
 
         <div class="item">
-            <img src="{% static 'main/images/sheild.png/' %}" alt="" class="hero_actions_hero_images_defeat" title="Защита">
+            <img src="{% static 'main/images/sheild.png' %}" alt="" class="hero_actions_hero_images_defeat" title="Защита">
             <p>{{ battle.defeat_hero }}</p>
         </div>
 
         <div class="item">
             <a type="submit" href="{% url 'healing' %}">
-                <img src="{% static 'main/images/heal.png/' %}" alt="" class="hero_actions_hero_images" title="Восстановить здоровье">
+                <img src="{% static 'main/images/heal.png' %}" alt="" class="hero_actions_hero_images" title="Восстановить здоровье">
             </a>
             <p>{{ battle.bottles_hero }}</p>
         </div>
 
         <div class="item">
             <a type="submit" href="{% url 'leave' %}">
-                <img src="{% static 'main/images/leave.png/' %}" alt="" class="hero_actions_hero_images" title="Убежать">
+                <img src="{% static 'main/images/leave.png' %}" alt="" class="hero_actions_hero_images" title="Убежать">
             </a>
         </div>
 
